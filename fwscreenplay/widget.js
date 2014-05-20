@@ -1,4 +1,4 @@
-flexloader.extendApp(function ($, myApp, config) {
+flexloader.extendApp(function ($, App, config) {
 
     if (config.autoload) {
         flexloader.addCSS(config.script.basepath + "widget.css");
@@ -15,7 +15,7 @@ flexloader.extendApp(function ($, myApp, config) {
         }
     }
 
-    myApp.addWidget('fwscreenplay', {
+    App.addWidget('fwscreenplay', {
 
         html: function (template, settings) {
             return '\
@@ -39,7 +39,7 @@ flexloader.extendApp(function ($, myApp, config) {
         init: function (template, widget, settings) {
 
             var image = widget.find('.fw-beat-image');
-            image.attr('src', myApp.Music.nowplaying().image);
+            image.attr('src', App.Music.nowplaying().image);
 
             widget.hover(function () {
                 $(this).addClass('hovering');
@@ -47,7 +47,7 @@ flexloader.extendApp(function ($, myApp, config) {
                 $(this).removeClass('hovering');
             });
 
-            myApp.on('bbflex-nowplaying', function (media) {
+            App.on('bbflex-nowplaying', function (media) {
 
                 if (widget.hasClass('hovering')) {
                     image.animate({ opacity: 0, left: -400 }, function () {
