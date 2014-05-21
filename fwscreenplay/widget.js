@@ -1,18 +1,5 @@
 flexloader.extendApp(function ($, App, config) {
 
-    if (config.autoload) {
-        flexloader.addResource({ src: config.script.basepath + "widget.css" });
-        flexloader.addResource({
-            missing: function () {
-                return typeof jQuery === 'undefined' || typeof jQuery.path === 'undefined';
-            },
-            src: "//www.beatbrokerz.com/flex/js/jquery.path.js"
-        });
-        if (config.options && config.options.autoconfig) {
-            $('body').append('<div data-bbflex="widget:fwscreenplay">');
-        }
-    }
-
     App.addWidget('fwscreenplay', {
 
         html: function (template, settings) {
@@ -68,4 +55,37 @@ flexloader.extendApp(function ($, App, config) {
         }
 
     });
+
+    /**
+     * Autoload Handler
+     *
+     * Our autoload handling is placed after addWidget() for good reason. We want to ensure the widget is added
+     * right away because of our 'autodeploy' option that will add the widget into the DOM and then display it
+     * automatically.
+     *
+     * Also, we separate the task into two parts since we want to put the placeholder into the DOM right
+     * away, but we dont want to actually load the widget until the app data is ready, so we use the
+     * App.ready() method to delay the actual rendering of the widget.
+     *
+     * Note: if this handling block was placed before the addWidget() method, things would still work fine if
+     * doing the autoload during page boot (because of our App.ready() technique). The problem surfaces when
+     * we try to autoload this widget after the page has loaded (and therefore the app is already ready!).
+     *
+     */
+    if (config.autoload) {
+        flexloader.addResource({ src: config.script.basepath + "widget.css" });
+        flexloader.addResource({
+            missing: function () {
+                return typeof jQuery === 'undefined' || typeof jQuery.path === 'undefined';
+            },
+            src: "//www.beatbrokerz.com/flex/js/jquery.path.js"
+        });
+        if (config.options && config.options.autodeploy) {
+            $('body').append('<div id="fwscreenplay-auto">');
+            App.ready(function() {
+                $('#fwscreenplay-auto').bbflex({ widget: 'fwscreenplay' });
+            });
+        }
+    }
+
 });
