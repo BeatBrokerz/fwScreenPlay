@@ -1,14 +1,12 @@
 flexloader.extendApp(function ($, App, config) {
 
     if (config.autoload) {
-        flexloader.addCSS(config.script.basepath + "widget.css");
-        flexloader.addResources({
-            path: {
-                missing: function () {
-                    return typeof jQuery === 'undefined' || typeof jQuery.path === 'undefined';
-                },
-                src: "//www.beatbrokerz.com/flex/js/jquery.path.js"
-            }
+        flexloader.addResource({ src: config.script.basepath + "widget.css" });
+        flexloader.addResource({
+            missing: function () {
+                return typeof jQuery === 'undefined' || typeof jQuery.path === 'undefined';
+            },
+            src: "//www.beatbrokerz.com/flex/js/jquery.path.js"
         });
         if (config.options && config.options.autoconfig) {
             $('body').append('<div data-bbflex="widget:fwscreenplay">');
