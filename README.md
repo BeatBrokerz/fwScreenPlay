@@ -3,7 +3,7 @@ Flex Widget: Screenplay Player
 
 ![Screenplay Player Preview](http://www.beatbrokerz.com/flex/widget/fwscreenplay/preview.png)
 
-This player floats at the top left of the screen and expands to full size when hovered over. It provides convenient access to song controls, licensing options, and music information.
+This player floats at the top left of the screen and expands to full size when hovered over. When not hovered, it shrinks down and becomes translucent until hovered again. It provides convenient access to song controls, licensing options, and music information.
 
 * [**LIVE DEMO** (jsfiddle.net)](http://jsfiddle.net/beatbrokerz/U59nF/)
 
