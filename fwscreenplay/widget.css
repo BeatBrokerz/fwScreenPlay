@@ -1,3 +1,11 @@
+.flex-widget-fwscreenplay *,
+.flex-widget-fwscreenplay *:before,
+.flex-widget-fwscreenplay *:after {
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+    text-shadow: none !important;
+}
 
 .flex-widget-fwscreenplay,
 .flex-widget-fwscreenplay .csstransition {
